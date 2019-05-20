@@ -12,12 +12,12 @@ class PollController extends Controller
 {
     public function store(Request $request)
     {
-        Poll::create(['name' => request('name')]);
+        $poll = Poll::create(['name' => request('name'), 'user_id' => request('userID')]);
 
         foreach(request('questions') as $question) {
-            Question::create(['content' => $question['content']]);
+            $q = Question::create(['content' => $question['content'], 'poll_id' => $poll->id]);
             foreach($question['choices'] as $choice) {
-                Choice::create(['content' => $choice]);
+                Choice::create(['content' => $choice, 'question_id' => $q->id]);
             }
         }
     }

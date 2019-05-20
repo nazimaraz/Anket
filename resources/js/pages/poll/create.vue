@@ -88,6 +88,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Form from "vform";
 
 export default {
@@ -97,15 +98,21 @@ export default {
     return { title: this.$t("create_a_poll") };
   },
 
+  computed: mapGetters({
+    user: "auth/user"
+  }),
+
   data: () => ({
     form: new Form({
       name: "",
-      questions: [{ content: "", choices: [""] }]
+      questions: [{ content: "", choices: [""] }],
+      userID: ""
     })
   }),
 
   methods: {
     create() {
+      this.form.userID = this.user.id;
       this.form.post("/api/poll/store");
     },
 
