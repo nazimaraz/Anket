@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poll;
+use App\Models\Question;
+use App\Models\Choice;
+
 use Illuminate\Http\Request;
 
 class PollController extends Controller
 {
     public function store(Request $request)
     {
-        $poll = Poll::create(['name' => $request->get('poll_name')]);
-        $question = Question::create(['content' => $request->get('question')]);
+        Poll::create(['name' => request('name')]);
 
-        $choices = [$request->get('a'), $request->get('b')];
-        foreach($choices as $choice) {
-            $c = Choice::create(['content' => $choice]);
+        foreach(request('questions') as $question) {
+            Question::create(['content' => $question['content']]);
+            foreach($question['choices'] as $choice) {
+                Choice::create(['content' => $choice]);
+            }
         }
-
-        return redirect('/poll')->with('success', 'Contact saved!');
     }
 }
