@@ -1,4 +1,16 @@
 {
+  "create_a_poll": "Create Poll",
+  "polls": "Polls",
+  "poll_name": "Poll Name",
+  "poll_name_placeholder": "Enter a name for the poll",
+  "poll_question": "Poll Question",
+  "poll_question_placeholder": "Enter a question for the poll",
+  "choice": "Choice",
+  "add_a_choice": "Add a choice",
+  "add_a_question": "Add a question",
+  "poll_choice_placeholder": "Enter a choice for the poll",
+
+
   "ok": "Ok",
   "cancel": "Cancel",
   "error_alert_title": "Oops...",

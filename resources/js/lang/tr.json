@@ -1,4 +1,16 @@
 {
+  "create_a_poll": "Anket Oluştur",
+  "polls": "Anketler",
+  "poll_name": "Anket Adı",
+  "poll_name_placeholder": "Anket için bir isim girin.",
+  "poll_question": "Anket Sorusu",
+  "poll_question_placeholder": "Anket için bir soru girin.",
+  "choice": "Seçenek",
+  "add_a_choice": "Seçenek ekle",
+  "add_a_question": "Soru ekle",
+  "poll_choice_placeholder": "Anket için bir seçenek girin.",
+
+
   "ok": "Ok",
   "cancel": "Cancel",
   "error_alert_title": "Oops...",
