@@ -26,6 +26,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/poll/store', 'PollController@store');
 });
 
+Route::get('/poll/index', 'PollController@index');
+Route::get('/poll/{pollID}', 'PollController@show');
+Route::post('/choice/store', 'ChoiceController@store');
+Route::get('/poll/{pollID}/result', 'PollController@result');
+
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::post('register', 'Auth\RegisterController@register');
