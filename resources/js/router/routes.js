@@ -22,7 +22,10 @@ export default [
     ]
   },
 
+  { path: '/poll', name: 'poll.index', component: page('poll/index.vue') },
   { path: '/poll/create', name: 'poll.create', component: page('poll/create.vue') },
+  { path: '/poll/:pollID', name: 'poll.show', component: page('poll/show.vue') },
+  { path: '/poll/:pollID/result', name: 'poll.result', component: page('poll/result.vue') },
 
   { path: '*', component: page('errors/404.vue') }
 ]
