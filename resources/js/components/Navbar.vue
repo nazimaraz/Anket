@@ -18,7 +18,7 @@
         <ul class="navbar-nav">
           <locale-dropdown/>
           <li class="nav-item">
-            <a class="nav-link" href="#">{{ $t('polls') }}</a>
+            <router-link :to="{ name: 'poll.index' }" class="nav-link">{{ $t('polls') }}</router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'poll.create' }" class="nav-link">{{ $t('create_a_poll') }}</router-link>
