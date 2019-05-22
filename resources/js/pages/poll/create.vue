@@ -24,7 +24,9 @@
             class="form-group"
           >
             <div class="row">
-              <label class="col-md-2 col-form-label text-md-right">{{ $t('poll_question') }}</label>
+              <label
+                class="col-md-2 col-form-label text-md-right"
+              >{{ questionIndex + 1 + ". " + $t('poll_question') }}</label>
               <div class="col-md-10">
                 <input
                   v-model="form.questions[questionIndex].content"
