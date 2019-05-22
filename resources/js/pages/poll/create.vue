@@ -5,76 +5,97 @@
         <form @submit.prevent="create" @keydown="form.onKeydown($event)">
           <!-- Name -->
           <div class="form-group row">
-            <b class="col-md-3 col-form-label text-md-right">{{ $t('poll_name') }}</b>
-            <div class="col-md-7">
+            <label
+              for="poll-name"
+              class="col-sm-2 col-form-label text-md-right"
+            >{{ $t('poll_name') }}</label>
+            <div class="col-sm-10">
               <input
                 v-model="form.name"
-                class="form-control"
                 type="text"
-                name="name"
+                class="form-control"
+                id="poll-name"
                 :placeholder="$t('poll_name_placeholder')"
               >
             </div>
           </div>
 
           <!-- Question(s) -->
-          <div
-            v-for="(question, questionIndex) in form.questions"
-            :key="questionIndex"
-            class="form-group"
-          >
-            <div class="row">
+          <div v-for="(question, questionIndex) in form.questions" :key="questionIndex">
+            <div class="form-group row">
               <label
-                class="col-md-2 col-form-label text-md-right"
+                :for="'question-' + questionIndex"
+                class="col-sm-2 col-form-label text-md-right"
               >{{ questionIndex + 1 + ". " + $t('poll_question') }}</label>
-              <div class="col-md-10">
+              <div class="col-sm-10">
                 <input
                   v-model="form.questions[questionIndex].content"
-                  class="form-control"
                   type="text"
-                  name="question"
+                  class="form-control"
+                  :id="'question-' + questionIndex"
                   :placeholder="$t('poll_question_placeholder')"
                 >
-              </div>
-            </div>
-            <!-- Choices -->
-            <div
-              v-for="(choice, choiceIndex) in form.questions[questionIndex].choices"
-              :key="choiceIndex"
-              class="form-group row"
-            >
-              <label
-                class="col-md-2 col-form-label text-md-right"
-              >{{ choiceIndex + 1 + ". " + $t('choice') }}</label>
-              <div class="col-md-6">
-                <input
-                  v-model="form.questions[questionIndex].choices[choiceIndex]"
-                  class="form-control"
-                  type="text"
-                  name="question"
-                  :placeholder="$t('poll_choice_placeholder')"
-                >
-              </div>
-            </div>
-            <div class="row">
-              <button
-                type="button"
-                class="btn btn-primary"
-                style="float: left"
-                @click="addChoice(questionIndex)"
-              >
-                {{ $t('add_a_choice') }}
-                <fa icon="plus-circle" fixed-width/>
-              </button>
-            </div>
-          </div>
 
-          <!-- Add Question -->
-          <div class="row">
-            <button type="button" class="btn btn-primary" style="float: right" @click="addQuestion">
-              {{ $t('add_a_question') }}
-              <fa icon="plus-circle" fixed-width/>
-            </button>
+                <!-- Choices -->
+                <div
+                  v-for="(choice, choiceIndex) in form.questions[questionIndex].choices"
+                  :key="choiceIndex"
+                  class="form-group row"
+                >
+                  <label
+                    :for="'choice-' + choiceIndex"
+                    class="col-sm-2 col-form-label text-md-right"
+                  >{{ choiceIndex + 1 + ". " + $t('choice') }}</label>
+                  <div class="col-sm-10">
+                    <input
+                      v-model="form.questions[questionIndex].choices[choiceIndex]"
+                      type="text"
+                      class="form-control"
+                      :id="'choice-' + choiceIndex"
+                      :placeholder="$t('poll_choice_placeholder')"
+                    >
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      style="float: left"
+                      @click="addChoice(questionIndex)"
+                    >
+                      {{ $t('add_a_choice') }}
+                      <fa icon="plus-circle" fixed-width/>
+                    </button>
+                  </div>
+                  <div class="col-sm-4">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      style="float: left"
+                      @click="addQuestion"
+                    >
+                      {{ $t('add_a_question') }}
+                      <fa icon="plus-circle" fixed-width/>
+                    </button>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        :id="'other-choice-' + questionIndex"
+                        v-model="form.questions[questionIndex].otherChoice"
+                      >
+                      <label
+                        class="form-check-label"
+                        :for="'other-choice-' + questionIndex"
+                      >Diğer Seçeneği Olsun</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Create Button -->
@@ -107,7 +128,7 @@ export default {
   data: () => ({
     form: new Form({
       name: "",
-      questions: [{ content: "", choices: [""] }],
+      questions: [{ content: "", choices: [""], otherChoice: false }],
       userID: ""
     })
   }),
@@ -119,7 +140,11 @@ export default {
     },
 
     addQuestion() {
-      this.form.questions.push({ content: "", choices: [""] });
+      this.form.questions.push({
+        content: "",
+        choices: [""],
+        otherChoice: false
+      });
     },
     addChoice(questionIndex) {
       this.form.questions[questionIndex].choices.push("");
