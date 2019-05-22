@@ -9,6 +9,11 @@
   "add_a_choice": "Add a choice",
   "add_a_question": "Add a question",
   "poll_choice_placeholder": "Enter a choice for the poll",
+  "polls": "Polls",
+  "votes": "Votes",
+  "vote": "Vote",
+  "results": "Results",
+  "submit": "Submit",
 
 
   "ok": "Ok",

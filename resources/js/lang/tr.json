@@ -9,6 +9,11 @@
   "add_a_choice": "Seçenek ekle",
   "add_a_question": "Soru ekle",
   "poll_choice_placeholder": "Anket için bir seçenek girin.",
+  "polls": "Anketler",
+  "votes": "Oy",
+  "vote": "Oy Ver",
+  "results": "Sonuçlar",
+  "submit": "Gönder",
 
 
   "ok": "Ok",
