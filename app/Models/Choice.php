@@ -12,4 +12,9 @@ class Choice extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::Class);
+    }
 }
