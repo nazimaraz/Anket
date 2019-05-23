@@ -19,27 +19,51 @@
         <div class="list-group list-group-flush">
           <div
             class="custom-control custom-radio list-group-item"
-            v-for="choice in question.choices"
-            :key="choice.id"
+            v-for="(choice, choiceIndex) in question.choices"
+            :key="choiceIndex"
           >
             <input
+              v-model="userChoices[questionIndex]"
               type="radio"
               :id="choice.id"
               :value="choice.id"
-              v-model="userChoices[questionIndex]"
               :name="question.id"
               class="custom-control-input choice-input"
             >
             <label class="custom-control-label" :for="choice.id">{{ choice.content }}</label>
           </div>
+          <div v-if="question.isOtherExist" class="custom-control custom-radio list-group-item">
+            <input
+              v-model="userChoices[questionIndex]"
+              :value="{ id: question.id }"
+              type="radio"
+              :id="'other-choice-' + questionIndex"
+              :name="question.id"
+              class="custom-control-input choice-input"
+            >
+            <label
+              class="custom-control-label"
+              :for="'other-choice-' + questionIndex"
+            >{{ $t('other') }}:</label>
+            <div class="col-sm-10" style="float: right">
+              <input
+                v-model="otherChoices[question.id]"
+                type="text"
+                :id="'other-text-' + questionIndex"
+                class="form-control"
+                :placeholder="$t('enter_other_choice')"
+              >
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-md-6">
           <button type="button" class="btn btn-success" @click="submit">{{ $t('submit') }}</button>
         </div>
         <div class="col-md-6">
-          <button type="button" class="btn btn-primary" @click="results">{{ $t('results') }}</button>
+          <button type="button" class="btn btn-primary" @click="results">{{ $t('show_results') }}</button>
         </div>
       </div>
     </section>
@@ -62,7 +86,8 @@ export default {
   data: () => ({
     poll: {},
     userChoices: [],
-    isLoading: true
+    isLoading: true,
+    otherChoices: {}
   }),
   created() {
     axios.get("/api/poll/" + this.$route.params.pollID).then(response => {
@@ -79,7 +104,17 @@ export default {
       });
     },
     submit() {
-      console.log("t");
+      this.userChoices.forEach(choice => {
+        if (typeof choice === "object") {
+          choice[choice.id] =
+            typeof this.otherChoices[choice.id] !== "undefined"
+              ? this.otherChoices[choice.id]
+              : "";
+          delete choice.id;
+        }
+      });
+
+      console.log(this.userChoices);
       axios
         .post("/api/choice/store", {
           userChoices: this.userChoices,
