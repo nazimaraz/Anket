@@ -59,13 +59,14 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6">
+        <div v-if="!poll.only_user || user" class="col-md-6">
           <button type="button" class="btn btn-success" @click="submit">{{ $t('submit') }}</button>
         </div>
         <div class="col-md-6">
           <button type="button" class="btn btn-primary" @click="results">{{ $t('show_results') }}</button>
         </div>
       </div>
+      <div v-if="poll.only_user && !user" class="row">{{ $t('only_user_can_vote') }}</div>
     </section>
   </section>
 </template>
@@ -114,11 +115,11 @@ export default {
         }
       });
 
-      console.log(this.userChoices);
       axios
         .post("/api/choice/store", {
           userChoices: this.userChoices,
-          userID: this.user.id
+          userID: this.user === null ? 1 : this.user.id,
+          onlyUser: this.poll.only_user
         })
         .then(
           this.$router.push({
