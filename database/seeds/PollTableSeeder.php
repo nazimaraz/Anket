@@ -13,11 +13,47 @@ class PollTableSeeder extends Seeder
     {
         \DB::table('polls')->insert([
         	'user_id' => 1,
-        	'name' =>' Anket Adı 1',
+        	'name' => 'Teknik Destek Hizmeti Memnuniyeti',
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);
-		
+
+		\DB::table('questions')->insert([
+        	'poll_id' => 1,
+			'content' => 'Teknik desteğe ulaşmada güçlük yaşıyor musunuz?',
+			'isOtherExist' => 0,
+        	'created_at' => NOW(),
+        	'updated_at' => NOW()
+		]);
+
+		\DB::table('choices')->insert([
+        	'question_id' => 1,
+        	'content' => 'Hayır',
+        	'created_at' => NOW(),
+        	'updated_at' => NOW()
+		]);
+
+		\DB::table('choices')->insert([
+        	'question_id' => 1,
+        	'content' => 'Bazen',
+        	'created_at' => NOW(),
+        	'updated_at' => NOW()
+		]);
+
+		\DB::table('choices')->insert([
+        	'question_id' => 1,
+        	'content' => 'Sıklıkla',
+        	'created_at' => NOW(),
+        	'updated_at' => NOW()
+		]);
+
+		\DB::table('choices')->insert([
+        	'question_id' => 1,
+        	'content' => 'Her zaman',
+        	'created_at' => NOW(),
+        	'updated_at' => NOW()
+		]);
+
     	\DB::table('polls')->insert([
         	'user_id' => 1,
         	'name' =>' Anket Adı 2',
@@ -28,14 +64,6 @@ class PollTableSeeder extends Seeder
     	\DB::table('polls')->insert([
         	'user_id' => 2,
         	'name' =>' Anket Adı 3',
-        	'created_at' => NOW(),
-        	'updated_at' => NOW()
-		]);
-		
-    	\DB::table('questions')->insert([
-        	'poll_id' => 1,
-			'content' => 'Soru 1',
-			'isOtherExist' => 0,
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);

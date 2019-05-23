@@ -17,6 +17,7 @@ class CreatePollsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('name');
+            $table->boolean('only_user');
             $table->timestamps();
         });
     }
