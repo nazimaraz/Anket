@@ -26,6 +26,19 @@
               <div id="myBar" :style="'width: ' + choice.percentage + '%'">{{ choice.percentage }}%</div>
             </div>
           </div>
+
+          <div v-if="question.isOtherExist" class="list-group-item">
+            <label class="choice-content" for="choice.id">
+              {{ $t('other') }}
+              <b>({{ question.totalOtherVotes + ' ' + $t('votes') }})</b>
+            </label>
+            <div id="myProgress">
+              <div
+                id="myBar"
+                :style="'width: ' + question.otherPercentage + '%'"
+              >{{ question.otherPercentage }}%</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -65,10 +78,14 @@ export default {
       .get("/api/poll/" + this.$route.params.pollID + "/result")
       .then(response => {
         this.poll = response.data;
+        console.log(this.poll);
         this.poll.questions.forEach(question => {
+          question.otherPercentage =
+            (question.totalOtherVotes * 100) / question.totalVotes;
           question.choices.forEach(choice => {
             if (question.totalVotes === 0) {
               choice.percentage = 0;
+              question.otherPercentage = 0;
             } else {
               choice.percentage = (
                 (choice.voteNumber * 100) /
