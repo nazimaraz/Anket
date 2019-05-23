@@ -27,5 +27,7 @@ export default [
   { path: '/poll/:pollID', name: 'poll.show', component: page('poll/show.vue') },
   { path: '/poll/:pollID/result', name: 'poll.result', component: page('poll/result.vue') },
 
+  { path: '/user/:userID', name: 'user.show', component: page('user/show.vue') },
+
   { path: '*', component: page('errors/404.vue') }
 ]
