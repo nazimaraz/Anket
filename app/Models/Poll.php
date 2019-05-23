@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poll extends Model
 {
-    protected $fillable = [ 'name', 'user_id' ];
+    protected $fillable = [ 'name', 'user_id', 'only_user' ];
 
     public function user()
     {
