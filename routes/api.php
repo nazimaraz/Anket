@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/poll/store', 'PollController@store');
 });
 
+Route::post('/comments/store', 'CommentController@store');
+Route::get('/poll/{pollID}/comments', 'CommentController@index');
 Route::get('/poll/index', 'PollController@index');
 Route::get('/poll/{pollID}', 'PollController@show');
 Route::post('/choice/store', 'ChoiceController@store');
