@@ -13,6 +13,7 @@ class ChoiceController extends Controller
     public function store(Request $request)
     {
         $userID = request('userID');
+        if($userID === 1 && request('onlyUser')) return;
         $user = User::find($userID);
         $userChoices = request('userChoices');
 
