@@ -31,14 +31,10 @@ export default {
     isLoading: true
   }),
   created() {
-    axios
-      .get("/api/poll/index")
-      .then(response => {
-        this.polls = response.data;
-      })
-      .then(response => {
-        this.isLoading = false;
-      });
+    axios.get("/api/poll/index").then(response => {
+      this.polls = response.data;
+      this.isLoading = false;
+    });
   }
 };
 </script>
