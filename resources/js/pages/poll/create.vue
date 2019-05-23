@@ -90,7 +90,7 @@
                       <label
                         class="form-check-label"
                         :for="'other-choice-' + questionIndex"
-                      >Diğer Seçeneği Olsun</label>
+                      >{{ $t('add_other_option') }}</label>
                     </div>
                   </div>
                 </div>
@@ -136,7 +136,12 @@ export default {
   methods: {
     create() {
       this.form.userID = this.user.id;
-      this.form.post("/api/poll/store");
+      this.form.post("/api/poll/store").then(response => {
+        this.$router.push({
+          name: "poll.show",
+          params: { pollID: response.data.pollID }
+        });
+      });
     },
 
     addQuestion() {
