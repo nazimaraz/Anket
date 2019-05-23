@@ -34,42 +34,48 @@ class PollTableSeeder extends Seeder
 		
     	\DB::table('questions')->insert([
         	'poll_id' => 1,
-        	'content' => 'Soru 1',
+			'content' => 'Soru 1',
+			'isOtherExist' => 0,
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);
 		
         \DB::table('questions')->insert([
         	'poll_id' => 1,
-        	'content' => 'Soru 2',
+			'content' => 'Soru 2',
+			'isOtherExist' => 0,
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);
 
 		\DB::table('questions')->insert([
         	'poll_id' => 1,
-        	'content' => 'Soru 3',
+			'content' => 'Soru 3',
+			'isOtherExist' => 0,
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);
 
 		\DB::table('questions')->insert([
         	'poll_id' => 2,
-        	'content' => 'Soru 4',
+			'content' => 'Soru 4',
+			'isOtherExist' => 0,
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);
 
 		\DB::table('questions')->insert([
         	'poll_id' => 2,
-        	'content' => 'Soru 5',
+			'content' => 'Soru 5',
+			'isOtherExist' => 0,
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);
 
 		\DB::table('questions')->insert([
         	'poll_id' => 3,
-        	'content' => 'Soru 6',
+			'content' => 'Soru 6',
+			'isOtherExist' => 0,
         	'created_at' => NOW(),
         	'updated_at' => NOW()
 		]);
