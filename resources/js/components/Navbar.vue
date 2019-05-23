@@ -40,7 +40,10 @@
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
+              <router-link
+                :to="{ name: 'user.show', params: { userID: user.id} }"
+                class="dropdown-item pl-3"
+              >
                 <fa icon="poll" fixed-width/>
                 {{ $t('your_polls') }}
               </router-link>
