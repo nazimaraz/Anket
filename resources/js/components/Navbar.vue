@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
-      <router-link :to="{ name: user ? 'home' : 'login' }" class="navbar-brand">{{ appName }}</router-link>
+      <router-link :to="{ name: 'home' }" class="navbar-brand">{{ appName }}</router-link>
 
       <button
         class="navbar-toggler"
@@ -36,10 +36,15 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img :src="user.photo_url" class="rounded-circle profile-photo mr-1">
+              <!-- <img :src="user.photo_url" class="rounded-circle profile-photo mr-1"> -->
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
+              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
+                <fa icon="poll" fixed-width/>
+                {{ $t('your_polls') }}
+              </router-link>
+
               <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
                 <fa icon="cog" fixed-width/>
                 {{ $t('settings') }}
