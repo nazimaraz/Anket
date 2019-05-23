@@ -20,10 +20,14 @@
         </div>
         <form v-if="user" @submit.prevent="submit">
           <div class="form-group">
-            <label for="comment">Email address</label>
-            <input v-model="comment" class="form-control" id="comment" placeholder="Enter email">
+            <input
+              v-model="comment"
+              class="form-control"
+              id="comment"
+              :placeholder="$t('enter_a_comment')"
+            >
           </div>
-          <button class="btn btn-primary">Submit</button>
+          <button class="btn btn-primary">{{ $t('submit_comment') }}</button>
         </form>
       </div>
     </div>
@@ -50,12 +54,15 @@ export default {
   }),
   methods: {
     submit() {
-      console.log(this.comment);
-      axios.post("/api/comments/store", {
-        comment: this.comment,
-        userID: this.user.id,
-        pollID: this.poll.id
-      });
+      axios
+        .post("/api/comments/store", {
+          comment: this.comment,
+          userID: this.user.id,
+          pollID: this.poll.id
+        })
+        .then(response => {
+          location.reload();
+        });
     }
   },
   created() {
@@ -63,7 +70,6 @@ export default {
       .get("/api/poll/" + this.$route.params.pollID + "/comments")
       .then(response => {
         this.poll = response.data;
-        console.log(this.poll.comments);
       });
     this.isLoading = false;
   }
