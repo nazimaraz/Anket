@@ -14,7 +14,11 @@ class PollController extends Controller
 {
     public function store(Request $request)
     {
-        $poll = Poll::create(['name' => request('name'), 'user_id' => request('userID')]);
+        $poll = Poll::create([
+                                'name' => request('name'),
+                                'user_id' => request('userID'),
+                                'only_user' => request('onlyUserChoice')
+                                ]);
 
         foreach(request('questions') as $question) {
             $q = Question::create([
