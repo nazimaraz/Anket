@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = [ 'content', 'poll_id' ];
+    protected $fillable = [ 'content', 'poll_id', 'isOtherExist' ];
 
     public function poll()
     {
@@ -16,5 +16,10 @@ class Question extends Model
     public function choices()
     {
         return $this->hasMany(Choice::class);
+    }
+
+    public function otherChoice()
+    {
+        return $this->hasOne(OtherChoice::class);
     }
 }
