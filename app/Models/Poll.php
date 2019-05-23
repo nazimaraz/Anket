@@ -17,4 +17,9 @@ class Poll extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
