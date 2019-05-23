@@ -3,6 +3,22 @@
     <div class="col-lg-12">
       <card :title="$t('create_a_poll')">
         <form @submit.prevent="create" @keydown="form.onKeydown($event)">
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="only-user-choice"
+                  v-model="form.onlyUserChoice"
+                >
+                <label
+                  class="form-check-label"
+                  for="only-user-choice"
+                >{{ $t('only_user_can_vote') }}</label>
+              </div>
+            </div>
+          </div>
           <!-- Name -->
           <div class="form-group row">
             <label
@@ -129,7 +145,8 @@ export default {
     form: new Form({
       name: "",
       questions: [{ content: "", choices: [""], otherChoice: false }],
-      userID: ""
+      userID: "",
+      onlyUserChoice: false
     })
   }),
 
